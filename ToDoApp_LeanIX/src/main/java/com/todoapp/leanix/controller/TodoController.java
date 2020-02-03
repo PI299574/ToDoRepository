@@ -3,7 +3,6 @@ package com.todoapp.leanix.controller;
 import java.io.IOException;
 import java.util.List;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +37,10 @@ public class TodoController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getTodotask(@PathVariable("id") Long todoId) {
-		logger.info("TodoController:getTodotask****Fetching Item with id {}******", todoId);
+		logger.info("TodoController:getTodotask****Fetching Todo with id {}******", todoId);
 		Todo todoDetail = todoService.getTodo(todoId);
 		if (null == todoDetail) {
-			logger.error("itemDetail  with id {} not found.", todoDetail);
+			logger.error("TodoDetail  with id {} not found.", todoDetail);
 			return new ResponseEntity(
 					new com.todoapp.leanix.util.CustomErrorType("todo with id " + todoId + " not found"),
 					HttpStatus.NOT_FOUND);
@@ -88,7 +87,7 @@ public class TodoController {
 	@PutMapping("/{id}")
 	public ResponseEntity<?> upadteTodo(@PathVariable("id") Long todoId) throws Exception {
 
-		logger.info("TodoController::::Updating item  with id {}", todoId);
+		logger.info("TodoController::::Updating Todo  with id {}", todoId);
 
 		Todo todoDetail = todoService.getTodo(todoId);
 
@@ -116,7 +115,7 @@ public class TodoController {
 		}
 
 		todoService.deleteTodo(todoId);
-		return new ResponseEntity<Item>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Todo>(HttpStatus.NO_CONTENT);
 	}
 
 }
